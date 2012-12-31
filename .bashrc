@@ -68,5 +68,6 @@ PS1="[\u@`hostname`$NO_COLOUR \W$YELLOW\$(parse_git_branch)$NO_COLOUR]\$ "
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-source .aliases
+source ~/.aliases
 source /usr/share/git/completion/git-completion.bash
+source ~/.functions
