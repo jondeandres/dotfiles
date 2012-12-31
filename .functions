@@ -1,0 +1,52 @@
+export WUAKI_PROJECTS=~/wuaki/
+
+function cs {
+        local dest current
+ 
+        # Asegúrese que el directorio source exista.
+        mkdir -p "$WUAKI_PROJECTS"
+ 
+        # argumento de línea de comandos
+        if test -n "$1"; then
+                cd "$WUAKI_PROJECTS/$1"
+        else
+                # substituye el directorio build con el directorio src
+                dest=`pwd | sed -e s,$KDE_BUILD,$WUAKI_PROJECTS,`
+                current=`pwd`
+                if [ "$dest" = "$current" ]; then
+                        cd "$WUAKI_PROJECTS"
+                else
+                        cd "$dest"
+                fi
+        fi
+}
+ 
+# Añadir  la función autocompletar a  cs
+function _cs_scandir
+{
+        local base ext
+ 
+        base=$1
+        ext=$2
+        if [ -d $base ]; then
+                for d in `ls $base`; do
+                        if [ -d $base/$d ]; then
+                                dirs="$dirs $ext$d/"
+                        fi
+                done
+        fi
+}
+ 
+function _cs()
+{
+        local cur dirs
+        _cs_scandir "$WUAKI_PROJECTS"
+        _cs_scandir "$WUAKI_PROJECTS/KDE" "KDE/"
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        COMPREPLY=( $(compgen -W "${dirs}" -- ${cur}) )
+}
+ 
+# Eliminar comentario en la siguiente línea 
+# para permitir autocompletar a cs
+complete -F _cs cs
