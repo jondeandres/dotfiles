@@ -13,5 +13,5 @@ alias db='bundle exec rails dbconsole'
 alias g='bundle exec rails g'
 alias s='bundle exec rails s'
 alias r='bundle exec rake'
-alias rspec='bundle exec rspec'
+alias rspec='bundle exec rspec -c'
 
