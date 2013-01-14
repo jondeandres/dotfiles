@@ -40,4 +40,7 @@ export LANG="en_US.UTF-8"
 
 export PATH=$PATH:$HOME/bin
 
+autoload -U bashcompinit
+bashcompinit -i
+source ~/.projects_completion.sh
 source ~/.aliases
